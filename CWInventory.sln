@@ -5,6 +5,10 @@ VisualStudioVersion = 17.9.34616.47
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CWInventory", "CWInventory\CWInventory.csproj", "{C5D40E91-9F72-4662-9F14-7F0F415A829D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CWInventory.Core", "CWInventory.Core\CWInventory.Core.csproj", "{521C6D14-9B5C-4CBD-8AE8-460A5C4E064F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CWInventory.Infrastructure", "CWInventory.Infrastructure\CWInventory.Infrastructure.csproj", "{2DDCD825-7391-4A31-8E34-00D3AB9CD9E2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{C5D40E91-9F72-4662-9F14-7F0F415A829D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C5D40E91-9F72-4662-9F14-7F0F415A829D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C5D40E91-9F72-4662-9F14-7F0F415A829D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{521C6D14-9B5C-4CBD-8AE8-460A5C4E064F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{521C6D14-9B5C-4CBD-8AE8-460A5C4E064F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{521C6D14-9B5C-4CBD-8AE8-460A5C4E064F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{521C6D14-9B5C-4CBD-8AE8-460A5C4E064F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2DDCD825-7391-4A31-8E34-00D3AB9CD9E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2DDCD825-7391-4A31-8E34-00D3AB9CD9E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2DDCD825-7391-4A31-8E34-00D3AB9CD9E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2DDCD825-7391-4A31-8E34-00D3AB9CD9E2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
