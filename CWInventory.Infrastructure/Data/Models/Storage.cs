@@ -28,5 +28,7 @@ namespace CWInventory.Infrastructure.Data.Models
         public ICollection<IdentityUser> Employees { get; set; } = new List<IdentityUser>();
 
         public ICollection<Product> Products { get; set; } = new List<Product>();
+
+        public ICollection<Document> Documents { get; set; } = new List<Document>();
     }
 }
