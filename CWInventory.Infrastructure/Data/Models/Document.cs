@@ -33,7 +33,7 @@ namespace CWInventory.Infrastructure.Data.Models
 
         [Required]
         [Comment("Storage identifier")]
-        public string StorageId { get; set; } = string.Empty;
+        public int StorageId { get; set; }
 
         [ForeignKey(nameof(StorageId))]
         public Storage Storage { get; set; } = null!;

@@ -1,6 +1,9 @@
 ﻿using CWInventory.Infrastructure.Data.Models;
+using CWInventory.Infrastructure.Data.SeedDb;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System.Drawing;
+using System.Reflection.Emit;
 
 namespace CWInventory.Infrastrucure.Data
 {
@@ -20,6 +23,20 @@ namespace CWInventory.Infrastrucure.Data
                 .HasOne(sp => sp.Product)
                 .WithMany(sp => sp.Storages)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<Document>()
+                .HasOne(d => d.Creator)
+                .WithMany()
+                .OnDelete(DeleteBehavior.NoAction);
+
+            builder.Entity<Document>()
+                .HasOne(d => d.Storage)
+                .WithMany()
+                .OnDelete(DeleteBehavior.NoAction);
+
+            builder.ApplyConfiguration(new CateogryConfiguration());
+
+            base.OnModelCreating(builder);
         }
 
         public DbSet<Category> Categories { get; set; } = null!;
