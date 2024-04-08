@@ -23,6 +23,10 @@ namespace CWInventory.Infrastructure.Data.Models
         public string Description { get; set; } = string.Empty;
 
         [Required]
+        [Comment("Product price")]
+        public decimal Price { get; set; }
+
+        [Required]
         [Comment("Product's category identifier")]
         public int CategoryId { get; set; }
 
