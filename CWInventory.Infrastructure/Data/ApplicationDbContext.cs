@@ -34,6 +34,10 @@ namespace CWInventory.Infrastrucure.Data
                 .WithMany()
                 .OnDelete(DeleteBehavior.NoAction);
 
+            builder.Entity<Product>()
+                .Property(p => p.Price)
+                .HasPrecision(18, 2);
+
             builder.ApplyConfiguration(new CateogryConfiguration());
 
             base.OnModelCreating(builder);
