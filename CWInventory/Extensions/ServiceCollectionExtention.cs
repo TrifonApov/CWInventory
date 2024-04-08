@@ -1,7 +1,4 @@
-﻿using CWInventory.Core.Contracts;
-using CWInventory.Core.Services;
-using CWInventory.Infrastructure.Data.Common;
-using CWInventory.Infrastrucure.Data;
+﻿using CWInventory.Infrastrucure.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,8 +8,6 @@ namespace Microsoft.Extensions.DependencyInjection
     {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
-            services.AddScoped<IProductService, ProductService>();
-
             return services;
         }
 
@@ -20,8 +15,6 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             var connectionString = config.GetConnectionString("DefaultConnection");
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
-
-            services.AddScoped<IRepository, Repository>();
 
             services.AddDatabaseDeveloperPageExceptionFilter();
 

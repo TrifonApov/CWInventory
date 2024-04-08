@@ -1,23 +1,13 @@
-﻿using CWInventory.Core.Contracts;
-using Microsoft.AspNetCore.Authorization;
+﻿using CWInventory.Core.Models.Product;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CWInventory.Controllers
 {
     public class ProductController : BaseController
     {
-        private IProductService productService;
-        
-        public ProductController(IProductService _productService)
-        {
-            productService = _productService;
-        }
-
-        [AllowAnonymous]
         public async Task<IActionResult> All()
         {
-            var model = await productService.AllProducts();
-            
+            var model = new AllProductsViewModel();
             return View(model);
         }
     }
