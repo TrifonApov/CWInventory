@@ -7,18 +7,20 @@ namespace CWInventory.Controllers
     public class ProductController : BaseController
     {
         private IProductService productService;
-        
+
         public ProductController(IProductService _productService)
         {
             productService = _productService;
         }
 
         [AllowAnonymous]
+        [HttpGet]
         public async Task<IActionResult> All()
         {
             var model = await productService.AllProducts();
-            
+
             return View(model);
         }
+
     }
 }
