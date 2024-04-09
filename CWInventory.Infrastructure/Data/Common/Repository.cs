@@ -1,4 +1,5 @@
-﻿using CWInventory.Infrastrucure.Data;
+﻿using CWInventory.Infrastructure.Data.Models;
+using CWInventory.Infrastrucure.Data;
 using Microsoft.EntityFrameworkCore;
 
 namespace CWInventory.Infrastructure.Data.Common

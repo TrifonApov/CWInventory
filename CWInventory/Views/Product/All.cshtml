@@ -15,7 +15,8 @@
                     <div class="fw-bold">@product.Name</div>
                     @product.Description
                 </div>
-                <span class="badge bg-dark rounded-pill">@product.Price</span>
+                <a class="btn-outline-dark " asp-area="" asp-controller="Product" asp-action="ProductQuantity" asp-route-id="@product.Id">Check quantity</a>
+                <span class="badge bg-dark rounded-pill">Price: @product.Price</span>
             </li>
         }
     </ol>

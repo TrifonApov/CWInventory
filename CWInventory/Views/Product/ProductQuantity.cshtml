@@ -1,0 +1,16 @@
+﻿@model ProductQuantityModel
+@{
+    ViewData["Title"] = "Product Quantity in Storages";
+}
+
+@{
+    <h2>Quantity for @Model.Name</h2>
+
+    <ul class="list-group">
+        @foreach (var storage in Model.QuantityInStorages)
+        {
+            <li class="list-group-item">@storage.Key - @storage.Key</li>
+        }
+    </ul>
+
+}

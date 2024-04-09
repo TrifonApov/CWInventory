@@ -22,5 +22,12 @@ namespace CWInventory.Controllers
             return View(model);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> ProductQuantity(int id)
+        {
+            var model = await productService.GetQuantityInStorages(id);
+
+            return View(model);
+        }
     }
 }
