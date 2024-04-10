@@ -1,4 +1,6 @@
-﻿namespace CWInventory.Core.Models.Product
+﻿using CWInventory.Infrastructure.Data.Models;
+
+namespace CWInventory.Core.Models.Product
 {
     public class ProductModel
     {
@@ -10,5 +12,7 @@
         public string Category { get; set; } = string.Empty;
 
         public decimal Price { get; set; }
+
+        public ICollection<StoragesProducts> Storages { get; set; } = new List<StoragesProducts>();
     }
 }

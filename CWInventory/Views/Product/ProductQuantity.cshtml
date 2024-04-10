@@ -4,13 +4,12 @@
 }
 
 @{
-    <h2>Quantity for @Model.Name</h2>
+    <h2>Quantity for @Model.Name Total: @Model.QuantityInStorages.Sum(q=>q.Value)</h2>
 
     <ul class="list-group">
         @foreach (var storage in Model.QuantityInStorages)
         {
-            <li class="list-group-item">@storage.Key - @storage.Key</li>
+            <li class="list-group-item">Storage: @storage.Key Quantity: @storage.Value</li>
         }
     </ul>
-
 }

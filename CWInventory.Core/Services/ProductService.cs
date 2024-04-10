@@ -25,40 +25,52 @@ namespace CWInventory.Core.Services
                     Category = p.Category.Name,
                     Description = p.Description,
                     Price = p.Price,
+                    Storages = p.Storages
                 })
                 .ToListAsync();
         }
 
         public async Task<ProductQuantityModel> GetQuantityInStorages(int productId)
         {
-            var product = await repository
-                .GetByIdAsync<Product>(productId);
-            var productQuatities = new Dictionary<string, int>();
             var model = new ProductQuantityModel();
-            
+
+            var product = repository
+                .AllReadOnly<Product>()
+                .Select(p => new ProductModel()
+                {
+                    Id = p.Id,
+                    Name = p.Name,
+                    Category = p.Category.Name,
+                    Description = p.Description,
+                    Price = p.Price,
+                    Storages = p.Storages
+                }).FirstOrDefault(p => p.Id == productId);
+
             if (product != null)
             {
-                if (!product.Storages.Any())
+                model.ProductId = product.Id;
+                model.Name = product.Name;
+                model.Description = product.Description;
+
+
+                if (product.Storages.Any())
                 {
                     foreach (var storagesProducts in product.Storages)
                     {
                         var storage = await repository.GetByIdAsync<Storage>(storagesProducts.StorageId);
                         if (storage != null)
                         {
-                            productQuatities.Add(storage.Name, storagesProducts.Quantity);
+                            model.QuantityInStorages.Add(storage.Name, storagesProducts.Quantity);
                         }
                     }
                 }
 
-                model.ProductId = product.Id;
-                model.Name = product.Name;
-                model.Description = product.Description;
-                model.QuantityInStorages = productQuatities;
+
             };
 
             return model;
         }
 
-        
+
     }
 }
