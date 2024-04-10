@@ -10,5 +10,8 @@
 
         public const int PhoneNumberMinimumLenght = 10;
         public const int PhoneNumberMaximumLenght = 20;
+
+        public const string RequiredErrorMessage = "The field {0} is required";
+        public const string LengthErrorMessage = "The field {0} must be between {2} and {1} characters long";
     }
 }

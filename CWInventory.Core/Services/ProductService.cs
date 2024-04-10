@@ -1,4 +1,5 @@
 ﻿using CWInventory.Core.Contracts;
+using CWInventory.Core.Models.Category;
 using CWInventory.Core.Models.Product;
 using CWInventory.Infrastructure.Data.Common;
 using CWInventory.Infrastructure.Data.Models;
@@ -30,7 +31,7 @@ namespace CWInventory.Core.Services
                 .ToListAsync();
         }
 
-        public async Task<ProductQuantityModel> GetQuantityInStorages(int productId)
+        public async Task<ProductQuantityModel> GetQuantityInStoragesAsync(int productId)
         {
             var model = new ProductQuantityModel();
 
@@ -71,6 +72,33 @@ namespace CWInventory.Core.Services
             return model;
         }
 
+        public async Task<IEnumerable<CategoryModel>> AllCategoriesAsync()
+        {
+            return await repository.AllReadOnly<Category>()
+                .Select(c => new CategoryModel()
+                {
+                    Id = c.Id,
+                    Name = c.Name,
+                })
+                .ToListAsync();
+        }
 
+        
+        public async Task<int> CreateAsync(CreateProductModel model, int categoryId)
+        {
+            var product = new Product()
+            {
+                Name = model.Name,
+                Description = model.Description,
+                CategoryId = categoryId,
+                Price = model.Price
+            };
+
+            await repository.AddAsync(product);
+            await repository.SaveChangesAsync();
+
+            return product.Id;
+
+        }
     }
 }

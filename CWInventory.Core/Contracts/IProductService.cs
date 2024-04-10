@@ -6,7 +6,8 @@ namespace CWInventory.Core.Contracts
     {
         Task<IEnumerable<ProductModel>> AllProducts();
 
-        Task<ProductQuantityModel> GetQuantityInStorages(int productId);
+        Task<ProductQuantityModel> GetQuantityInStoragesAsync(int productId);
 
+        Task<int> CreateAsync(CreateProductModel model, int categoryId);
     }
 }
