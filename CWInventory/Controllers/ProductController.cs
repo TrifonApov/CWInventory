@@ -1,7 +1,5 @@
 ﻿using CWInventory.Core.Contracts;
-using CWInventory.Core.Models.Category;
 using CWInventory.Core.Models.Product;
-using CWInventory.Infrastructure.Data.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
