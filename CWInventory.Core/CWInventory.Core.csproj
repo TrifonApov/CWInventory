@@ -10,8 +10,4 @@
     <ProjectReference Include="..\CWInventory.Infrastructure\CWInventory.Infrastructure.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Models\Storage\" />
-  </ItemGroup>
-
 </Project>

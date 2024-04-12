@@ -1,6 +1,6 @@
 ﻿namespace CWInventory.Core.Contracts
 {
-    public interface IDocumentService
+    public interface ICategoryService
     {
     }
 }
