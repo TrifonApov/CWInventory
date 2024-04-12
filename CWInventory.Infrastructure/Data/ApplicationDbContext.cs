@@ -2,8 +2,6 @@
 using CWInventory.Infrastructure.Data.SeedDb;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using System.Drawing;
-using System.Reflection.Emit;
 
 namespace CWInventory.Infrastrucure.Data
 {
