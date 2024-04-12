@@ -56,5 +56,13 @@ namespace CWInventory.Controllers
             return RedirectToAction(nameof(All));
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Details(int id)
+        {
+            var model = await productService.DetailsAsync(id);
+
+            return View(model);
+        }
+
     }
 }

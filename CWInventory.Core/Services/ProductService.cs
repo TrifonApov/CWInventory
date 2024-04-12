@@ -83,7 +83,6 @@ namespace CWInventory.Core.Services
                 .ToListAsync();
         }
 
-        
         public async Task<int> CreateAsync(CreateProductModel model)
         {
             var product = new Product()
@@ -111,6 +110,21 @@ namespace CWInventory.Core.Services
                     Name = c.Name,
                 })
             .ToListAsync();
+        }
+
+        public Task<ProductDetailsModel> DetailsAsync(int id)
+        {
+            return repository
+                .AllReadOnly<Product>()
+                .Select(p => new ProductDetailsModel()
+                {
+                    Id = p.Id,
+                    Name = p.Name,
+                    Category = p.Category.Name,
+                    Description = p.Description,
+                    Price = p.Price.ToString()
+                })
+                .FirstAsync(p => p.Id == id);
         }
     }
 }

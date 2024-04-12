@@ -1,0 +1,14 @@
+﻿@model ProductDetailsModel
+@{
+    ViewData["Title"] = $"{Model.Name} Details";
+}
+
+<div class="card" style="width: 18rem;">
+    <div class="card-body">
+        <h5 class="card-title">@Model.Name</h5>
+        <h6 class="card-subtitle mb-2 text-body-secondary">@Model.Category</h6>
+        <p class="card-text">@Model.Description</p>
+        <a class="card-link" asp-controller="Product" asp-action="ProductQuantity" asp-route-id="@Model.Id">Check Quantity</a>
+        <a class="card-link" asp-controller="Product" asp-action="Edit">Edit</a>
+    </div>
+</div>

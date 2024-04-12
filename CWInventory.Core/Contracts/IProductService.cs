@@ -12,5 +12,7 @@ namespace CWInventory.Core.Contracts
         Task<int> CreateAsync(CreateProductModel model);
 
         Task<IEnumerable<CategoryModel>> GetCategories();
+        
+        Task<ProductDetailsModel> DetailsAsync(int id);
     }
 }
