@@ -1,6 +1,8 @@
-﻿namespace CWInventory.Core.Services
+﻿using CWInventory.Core.Contracts;
+
+namespace CWInventory.Core.Services
 {
-    public class DocumentService
+    public class DocumentService : IDocumentService
     {
     }
 }

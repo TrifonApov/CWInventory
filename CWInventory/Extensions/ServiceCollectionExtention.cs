@@ -12,6 +12,9 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
             services.AddScoped<IProductService, ProductService>();
+            services.AddScoped<ICategoryService, CategoryService>();
+            services.AddScoped<IStorageService, StorageService>();
+            services.AddScoped<IDocumentService, DocumentService>();
 
             return services;
         }
@@ -22,6 +25,9 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
 
             services.AddScoped<IRepository, Repository>();
+            services.AddScoped<ICategoryService, CategoryService>();
+            services.AddScoped<IStorageService, StorageService>();
+            services.AddScoped<IDocumentService, DocumentService>();
 
             services.AddDatabaseDeveloperPageExceptionFilter();
 

@@ -1,0 +1,19 @@
+﻿@model IEnumerable<ProductModel>
+
+@{
+
+    <ul class="list-group">
+        @if (Model.Any())
+        {
+            <h2>All products in @Model.First().Category</h2>
+            @foreach (var product in Model)
+            {
+                <li class="list-group-item">@product.Name - @product.Price</li>
+            }
+        }
+        else
+        {
+            <h2> There is no products in this category</h2>
+        }
+    </ul>
+}
