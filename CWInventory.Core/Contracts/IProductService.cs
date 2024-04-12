@@ -1,4 +1,5 @@
-﻿using CWInventory.Core.Models.Product;
+﻿using CWInventory.Core.Models.Category;
+using CWInventory.Core.Models.Product;
 
 namespace CWInventory.Core.Contracts
 {
@@ -8,6 +9,8 @@ namespace CWInventory.Core.Contracts
 
         Task<ProductQuantityModel> GetQuantityInStoragesAsync(int productId);
 
-        Task<int> CreateAsync(CreateProductModel model, int categoryId);
+        Task<int> CreateAsync(CreateProductModel model);
+
+        Task<IEnumerable<CategoryModel>> GetCategories();
     }
 }

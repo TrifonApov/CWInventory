@@ -84,13 +84,13 @@ namespace CWInventory.Core.Services
         }
 
         
-        public async Task<int> CreateAsync(CreateProductModel model, int categoryId)
+        public async Task<int> CreateAsync(CreateProductModel model)
         {
             var product = new Product()
             {
                 Name = model.Name,
                 Description = model.Description,
-                CategoryId = categoryId,
+                CategoryId = model.CategoryId,
                 Price = model.Price
             };
 
@@ -99,6 +99,18 @@ namespace CWInventory.Core.Services
 
             return product.Id;
 
+        }
+
+        public async Task<IEnumerable<CategoryModel>> GetCategories()
+        {
+            return await repository
+                .AllReadOnly<Category>()
+                .Select(c => new CategoryModel()
+                {
+                    Id = c.Id,
+                    Name = c.Name,
+                })
+            .ToListAsync();
         }
     }
 }

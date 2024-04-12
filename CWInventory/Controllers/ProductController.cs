@@ -1,5 +1,7 @@
 ﻿using CWInventory.Core.Contracts;
+using CWInventory.Core.Models.Category;
 using CWInventory.Core.Models.Product;
+using CWInventory.Infrastructure.Data.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -24,7 +26,7 @@ namespace CWInventory.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> ProductQuantity(int id)
+        public async Task<IActionResult> ProductQuantityAsync(int id)
         {
             var model = await productService.GetQuantityInStoragesAsync(id);
 
@@ -32,10 +34,27 @@ namespace CWInventory.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Create()
+        public async Task<IActionResult> CreateAsync()
         {
-            throw new NotImplementedException();
-            
+            var model = new CreateProductModel();
+            model.Categories = await productService.GetCategories();
+
+            return View(model);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateAsync(CreateProductModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                if (model != null)
+                {
+                    await productService.CreateAsync(model);
+                }
+            }
+
+            return RedirectToAction(nameof(All));
+        }
+
     }
 }

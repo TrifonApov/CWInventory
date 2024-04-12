@@ -23,5 +23,8 @@ namespace CWInventory.Core.Models.Product
 
         [Required(ErrorMessage = RequiredErrorMessage)]
         public int CategoryId { get; set; }
+
+        public IEnumerable<CategoryModel> Categories { get; set; } = new List<CategoryModel>();
+
     }
 }
