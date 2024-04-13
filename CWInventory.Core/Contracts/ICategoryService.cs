@@ -9,8 +9,10 @@ namespace CWInventory.Core.Contracts
 
         Task<IEnumerable<ProductModel>> GetAllProductsByCategory(int categoryId);
 
+        public Task<CategoryModel> Details(int id);
+
         Task<int> CreateAsync(CategoryModel category);
 
-        Task EditAsync(int categoryId);
+        Task<CategoryModel> EditAsync(CategoryModel model);
     }
 }

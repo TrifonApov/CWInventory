@@ -26,11 +26,12 @@ namespace CWInventory.Core.Services
                 })
             .ToListAsync();
         }
+
         public async Task<IEnumerable<ProductModel>> GetAllProductsByCategory(int categoryId)
         {
             var products = await repository
                 .AllReadOnly<Product>()
-                .Where(p=>p.CategoryId == categoryId)
+                .Where(p => p.CategoryId == categoryId)
                 .Select(p => new ProductModel()
                 {
                     Id = p.Id,
@@ -40,13 +41,27 @@ namespace CWInventory.Core.Services
                     Category = p.Category.Name
                 })
                 .ToListAsync();
-            
+
             return products;
+        }
+
+        public async Task<CategoryModel> Details(int id)
+        {
+            var category = await repository.GetByIdAsync<Category>(id);
+            var model = new CategoryModel();
+
+            if (category != null)
+            { 
+                model.Id = category.Id;
+                model.Name = category.Name;
+            }
+
+            return model;
         }
 
         public async Task<int> CreateAsync(CategoryModel category)
         {
-            var model = new Category() 
+            var model = new Category()
             {
                 Name = category.Name,
             };
@@ -57,11 +72,24 @@ namespace CWInventory.Core.Services
             return category.Id;
         }
 
-        public Task EditAsync(int categoryId)
+        public async Task<CategoryModel> EditAsync(CategoryModel model)
         {
-            throw new NotImplementedException();
-        }
+            var category = await repository.GetByIdAsync<Category>(model.Id);
 
+            if (category != null)
+            {
+                category.Name = model.Name;
+                await repository.SaveChangesAsync();
+
+                return new CategoryModel()
+                {
+                    Id = category.Id,
+                    Name = category.Name,
+                };
+            }
+
+            return null;
+        }
 
     }
 }

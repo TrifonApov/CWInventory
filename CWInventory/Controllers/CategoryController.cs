@@ -29,7 +29,7 @@ namespace CWInventory.Controllers
         public async Task<IActionResult> GetAllProductsByCategory(int id)
         {
             var model = await categoryService.GetAllProductsByCategory(id);
-            
+
             return View(model);
         }
 
@@ -44,13 +44,29 @@ namespace CWInventory.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateAsync(CategoryModel model)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 if (model != null)
                 {
                     await categoryService.CreateAsync(model);
                 }
             }
+
+            return RedirectToAction(nameof(All));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> EditAsync(int id)
+        {
+            var model = await categoryService.Details(id);
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditAsync(CategoryModel model)
+        {
+            await categoryService.EditAsync(model);
 
             return RedirectToAction(nameof(All));
         }
