@@ -9,4 +9,6 @@
             <li class="list-group-item"><a asp-controller="Category" asp-action="GetAllProductsByCategory" asp-route-id="@category.Id">@category.Name</a></li>
         }
     </ul>
+
+    <a class="btn btn-primary" asp-area="" asp-controller="Category" asp-action="Create">Add new category</a>
 }

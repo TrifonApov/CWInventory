@@ -1,6 +1,4 @@
-﻿using System.Security.Claims;
-
-namespace CWInventory.Extensions
+﻿namespace System.Security.Claims
 {
     public static class ClaimsPrincipalExtentions
     {

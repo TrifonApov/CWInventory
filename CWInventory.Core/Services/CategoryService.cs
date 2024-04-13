@@ -44,9 +44,17 @@ namespace CWInventory.Core.Services
             return products;
         }
 
-        public Task CreateAsync(CategoryModel category)
+        public async Task<int> CreateAsync(CategoryModel category)
         {
-            throw new NotImplementedException();
+            var model = new Category() 
+            {
+                Name = category.Name,
+            };
+
+            await repository.AddAsync(model);
+            await repository.SaveChangesAsync();
+
+            return category.Id;
         }
 
         public Task EditAsync(int categoryId)

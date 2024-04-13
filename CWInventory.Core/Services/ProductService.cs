@@ -97,7 +97,6 @@ namespace CWInventory.Core.Services
             await repository.SaveChangesAsync();
 
             return product.Id;
-
         }
 
         public async Task<IEnumerable<CategoryModel>> GetCategories()
