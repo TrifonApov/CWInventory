@@ -3,6 +3,7 @@ using CWInventory.Core.Services;
 using CWInventory.Infrastructure.Data.Common;
 using CWInventory.Infrastructure.Data.Models;
 using CWInventory.Infrastructure.Data;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace Microsoft.Extensions.DependencyInjection
