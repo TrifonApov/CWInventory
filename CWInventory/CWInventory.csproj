@@ -24,4 +24,8 @@
     <ProjectReference Include="..\CWInventory.Core\CWInventory.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Areas\Identity\Data\" />
+  </ItemGroup>
+
 </Project>
