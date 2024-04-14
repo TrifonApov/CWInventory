@@ -5,6 +5,10 @@
 
 <div class="card" style="width: 18rem;">
     <div class="card-body">
+        @{if (!string.IsNullOrEmpty(Model.ImageUrl))
+        {
+            <a href="@Model.ImageUrl" target="_blank"><img src="@Model.ImageUrl" class="card-img-top" alt="Can't load image..."></a>            
+        }}
         <h5 class="card-title">@Model.Name</h5>
         <h6 class="card-subtitle mb-2 text-body-secondary">@Model.Category</h6>
         <p class="card-text">@Model.Description</p>

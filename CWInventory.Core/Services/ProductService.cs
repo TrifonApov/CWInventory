@@ -90,7 +90,8 @@ namespace CWInventory.Core.Services
                 Name = model.Name,
                 Description = model.Description,
                 CategoryId = model.CategoryId,
-                Price = model.Price
+                Price = model.Price,
+                ImageUrl = model.ImageUrl,
             };
 
             await repository.AddAsync(product);
@@ -118,6 +119,7 @@ namespace CWInventory.Core.Services
                 .Select(p => new ProductDetailsModel()
                 {
                     Id = p.Id,
+                    ImageUrl = p.ImageUrl,
                     Name = p.Name,
                     Category = p.Category.Name,
                     Description = p.Description,

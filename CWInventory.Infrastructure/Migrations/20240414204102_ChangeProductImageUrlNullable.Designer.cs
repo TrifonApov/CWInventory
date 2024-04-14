@@ -4,6 +4,7 @@ using CWInventory.Infrastrucure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CWInventory.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240414204102_ChangeProductImageUrlNullable")]
+    partial class ChangeProductImageUrlNullable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -39,7 +41,7 @@ namespace CWInventory.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories", (string)null);
+                    b.ToTable("Categories");
 
                     b.HasComment("Product category");
 
@@ -122,7 +124,7 @@ namespace CWInventory.Infrastructure.Migrations
 
                     b.HasIndex("TypeId");
 
-                    b.ToTable("Documents", (string)null);
+                    b.ToTable("Documents");
 
                     b.HasComment("Document");
                 });
@@ -150,7 +152,7 @@ namespace CWInventory.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("DocumentTypes", (string)null);
+                    b.ToTable("DocumentTypes");
 
                     b.HasComment("Document type");
                 });
@@ -204,7 +206,7 @@ namespace CWInventory.Infrastructure.Migrations
 
                     b.HasIndex("StorageId");
 
-                    b.ToTable("Products", (string)null);
+                    b.ToTable("Products");
 
                     b.HasComment("Product");
                 });
@@ -233,7 +235,7 @@ namespace CWInventory.Infrastructure.Migrations
 
                     b.HasIndex("ManagerId");
 
-                    b.ToTable("Storages", (string)null);
+                    b.ToTable("Storages");
 
                     b.HasComment("Storage");
                 });
@@ -256,7 +258,7 @@ namespace CWInventory.Infrastructure.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("StoragesProducts", (string)null);
+                    b.ToTable("StoragesProducts");
 
                     b.HasComment("Products in different storeges with quantity");
                 });
@@ -289,7 +291,7 @@ namespace CWInventory.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Suppliers", (string)null);
+                    b.ToTable("Suppliers");
 
                     b.HasComment("Organization that provides products");
                 });
