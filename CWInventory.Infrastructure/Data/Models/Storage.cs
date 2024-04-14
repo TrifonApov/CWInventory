@@ -23,9 +23,9 @@ namespace CWInventory.Infrastructure.Data.Models
         public string ManagerId { get; set; } = string.Empty;
 
         [ForeignKey(nameof(ManagerId))]
-        public IdentityUser Manager { get; set; } = null!;
+        public ApplicationUser Manager { get; set; } = null!;
 
-        public ICollection<IdentityUser> Employees { get; set; } = new List<IdentityUser>();
+        public ICollection<ApplicationUser> Employees { get; set; } = new List<ApplicationUser>();
 
         public ICollection<Product> Products { get; set; } = new List<Product>();
 

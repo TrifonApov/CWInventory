@@ -22,14 +22,14 @@ namespace CWInventory.Infrastructure.Data.Models
         [Required]
         [Comment("Creator of the document")]
         [ForeignKey(nameof(CreatorId))]
-        public IdentityUser Creator { get; set; } = null!;
+        public ApplicationUser Creator { get; set; } = null!;
 
         [Required]
         [Comment("Client identifier")]
         public string ClientId { get; set; } = string.Empty;
         
         [ForeignKey(nameof(ClientId))]
-        public IdentityUser Client { get; set; } = null!;
+        public ApplicationUser Client { get; set; } = null!;
 
         [Required]
         [Comment("Storage identifier")]

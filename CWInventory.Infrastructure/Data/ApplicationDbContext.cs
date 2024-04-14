@@ -3,7 +3,7 @@ using CWInventory.Infrastructure.Data.SeedDb;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace CWInventory.Infrastrucure.Data
+namespace CWInventory.Infrastructure.Data
 {
     public class ApplicationDbContext : IdentityDbContext
     {

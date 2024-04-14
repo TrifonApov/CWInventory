@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CWInventory.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240408125121_AddedProductPrice")]
-    partial class AddedProductPrice
+    [Migration("20240414151019_AddedAplicationUser")]
+    partial class AddedAplicationUser
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -187,7 +187,8 @@ namespace CWInventory.Infrastructure.Migrations
 
                     b.Property<decimal>("Price")
                         .HasPrecision(18, 2)
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18,2)")
+                        .HasComment("Product price");
 
                     b.Property<int?>("StorageId")
                         .HasColumnType("int");
@@ -354,6 +355,10 @@ namespace CWInventory.Infrastructure.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Email")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
@@ -387,9 +392,6 @@ namespace CWInventory.Infrastructure.Migrations
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("StorageId")
-                        .HasColumnType("int");
-
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("bit");
 
@@ -407,9 +409,9 @@ namespace CWInventory.Infrastructure.Migrations
                         .HasDatabaseName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
-                    b.HasIndex("StorageId");
-
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUser");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -497,15 +499,37 @@ namespace CWInventory.Infrastructure.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("CWInventory.Infrastructure.Data.Models.ApplicationUser", b =>
+                {
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<int?>("StorageId")
+                        .HasColumnType("int");
+
+                    b.HasIndex("StorageId");
+
+                    b.HasDiscriminator().HasValue("ApplicationUser");
+                });
+
             modelBuilder.Entity("CWInventory.Infrastructure.Data.Models.Document", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "Client")
+                    b.HasOne("CWInventory.Infrastructure.Data.Models.ApplicationUser", "Client")
                         .WithMany()
                         .HasForeignKey("ClientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "Creator")
+                    b.HasOne("CWInventory.Infrastructure.Data.Models.ApplicationUser", "Creator")
                         .WithMany()
                         .HasForeignKey("CreatorId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -557,7 +581,7 @@ namespace CWInventory.Infrastructure.Migrations
 
             modelBuilder.Entity("CWInventory.Infrastructure.Data.Models.Storage", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "Manager")
+                    b.HasOne("CWInventory.Infrastructure.Data.Models.ApplicationUser", "Manager")
                         .WithMany()
                         .HasForeignKey("ManagerId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -592,13 +616,6 @@ namespace CWInventory.Infrastructure.Migrations
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
-                {
-                    b.HasOne("CWInventory.Infrastructure.Data.Models.Storage", null)
-                        .WithMany("Employees")
-                        .HasForeignKey("StorageId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -641,6 +658,13 @@ namespace CWInventory.Infrastructure.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("CWInventory.Infrastructure.Data.Models.ApplicationUser", b =>
+                {
+                    b.HasOne("CWInventory.Infrastructure.Data.Models.Storage", null)
+                        .WithMany("Employees")
+                        .HasForeignKey("StorageId");
                 });
 
             modelBuilder.Entity("CWInventory.Infrastructure.Data.Models.Category", b =>
