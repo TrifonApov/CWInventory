@@ -50,6 +50,10 @@ namespace CWInventory.Controllers
                     await productService.CreateAsync(model);
                 }
             }
+            else
+            {
+                return BadRequest();
+            }
 
             return RedirectToAction(nameof(All));
         }
