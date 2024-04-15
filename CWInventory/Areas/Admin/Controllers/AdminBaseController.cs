@@ -4,7 +4,7 @@ using static CWInventory.Core.Constants.RoleConstants;
 
 namespace CWInventory.Areas.Admin.Controllers
 {
-    [Area("Admin")]
+    [Area(AdminAreaName)]
     [Authorize(Roles = AdminRole)]
     public class AdminBaseController : Controller
     {
