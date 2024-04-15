@@ -38,6 +38,7 @@ namespace CWInventory.Infrastructure.Data
 
             builder.ApplyConfiguration(new CateogryConfiguration());
             builder.ApplyConfiguration(new UserConfiguration());
+            builder.ApplyConfiguration(new UserClaimsConfiguration());
 
             base.OnModelCreating(builder);
         }

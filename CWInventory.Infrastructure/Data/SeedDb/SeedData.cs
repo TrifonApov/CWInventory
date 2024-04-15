@@ -1,5 +1,6 @@
 ﻿using CWInventory.Infrastructure.Data.Models;
 using Microsoft.AspNetCore.Identity;
+using static CWInventory.Infrastructure.Constants.CustomClaims;
 
 namespace CWInventory.Infrastructure.Data.SeedDb
 {
@@ -13,6 +14,7 @@ namespace CWInventory.Infrastructure.Data.SeedDb
         public Category MedicalCategory { get; set; }
         public Category CarDetergentCategory { get; set; }
         public ApplicationUser Administrator { get; set; }
+        public IdentityUserClaim<string> AdminUserClaim { get; set; }
 
         public SeedData()
         {
@@ -33,6 +35,14 @@ namespace CWInventory.Infrastructure.Data.SeedDb
                 NormalizedEmail = "ADMIN@WORKFORCE.BG",
                 FirstName = "Great",
                 LastName = "Admin"
+            };
+
+            AdminUserClaim = new IdentityUserClaim<string>
+            {
+                Id = 1,
+                ClaimType = UserFullNameClaim,
+                ClaimValue = "Great Admin",
+                UserId = "67e4c2d0-dc48-4004-b692-35f04e7f64a0"
             };
 
             Administrator.PasswordHash = hasher.HashPassword(Administrator, "admin123");
