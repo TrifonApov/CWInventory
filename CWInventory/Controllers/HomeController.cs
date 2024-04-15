@@ -11,6 +11,10 @@ namespace CWInventory.Controllers
         [AllowAnonymous]
         public IActionResult Index()
         {
+            if (User?.Identity != null && User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("All", "Product");
+            }
             var model = new IndexViewModel();
             return View(model);
         }
