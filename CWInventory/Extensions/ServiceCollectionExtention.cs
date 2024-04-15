@@ -1,9 +1,10 @@
 ﻿using CWInventory.Core.Contracts;
 using CWInventory.Core.Services;
 using CWInventory.Infrastructure.Data.Common;
-using CWInventory.Infrastrucure.Data;
+using CWInventory.Infrastructure.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using CWInventory.Infrastructure.Data.Models;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
@@ -37,7 +38,7 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IServiceCollection AddApplicationIdentity(this IServiceCollection services, IConfiguration config)
         {
             services
-                .AddDefaultIdentity<IdentityUser>(options =>
+                .AddDefaultIdentity<ApplicationUser>(options =>
                 {
                     options.SignIn.RequireConfirmedEmail = false;
                     options.Password.RequiredLength = 1;

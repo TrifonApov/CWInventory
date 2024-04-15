@@ -1,4 +1,4 @@
-﻿using CWInventory.Infrastrucure.Data;
+﻿using CWInventory.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
 namespace CWInventory.Infrastructure.Data.Common
