@@ -2,7 +2,8 @@
 using CWInventory.Core.Models.Storage;
 using CWInventory.Infrastructure.Data.Common;
 using CWInventory.Infrastructure.Data.Models;
-using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+
 
 namespace CWInventory.Core.Services
 {
@@ -15,9 +16,17 @@ namespace CWInventory.Core.Services
             repository = _repository;
         }
 
-        public async Task<IEnumerable<StorageViewModel>> AllStoragesAsync()
+        public async Task<IEnumerable<StorageViewModel>> AllAsync()
         {
-            throw new NotImplementedException();
+            return await repository
+                .AllReadOnly<Storage>()
+                .Select(s => new StorageViewModel()
+                {
+                    Id = s.Id,
+                    Name = s.Name,
+                    ManagerId = s.ManagerId
+                })
+                .ToListAsync();
         }
 
         public async Task CreateAsync(CreateStorageViewModel model)

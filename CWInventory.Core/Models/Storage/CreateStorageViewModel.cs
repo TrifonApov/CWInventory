@@ -1,6 +1,6 @@
-﻿using CWInventory.Infrastructure.Constants;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using static CWInventory.Infrastructure.Constants.DataConstants;
+
 namespace CWInventory.Core.Models.Storage
 {
     public class CreateStorageViewModel

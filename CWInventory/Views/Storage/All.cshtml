@@ -1,0 +1,27 @@
+﻿@using CWInventory.Core.Models.Storage
+@using static CWInventory.Core.Constants.RoleConstants;
+
+@model IEnumerable<StorageViewModel>
+
+@{
+    <h2>Storages</h2>
+
+    <ul class="list-group">
+        @foreach (var storage in Model)
+        {
+            <li class="list-group-item d-flex justify-content-between align-items-start">
+                <span class="fw-bold">@storage.Name</span>
+                <a class="btn-warning rounded-pill px-2" asp-controller="Storage" asp-action="Details">Details</a>
+                @if (User.IsInRole(AdminRole))
+                {
+                    <a class="btn-info rounded-pill px-2" asp-controller="Storage" asp-action="Edit">Edit</a>
+                }
+            </li>
+        }
+    </ul>
+
+    if (User.IsInRole(AdminRole))
+    {
+        <a class="btn btn-primary" asp-area="" asp-controller="Storage" asp-action="Create">Add new storage</a>
+    }
+}

@@ -1,16 +1,11 @@
-﻿using CWInventory.Core.Models.Product;
-using CWInventory.Core.Models.Storage;
+﻿using CWInventory.Core.Models.Storage;
 
 namespace CWInventory.Core.Contracts
 {
     public interface IStorageService
     {
-        Task<IEnumerable<StorageViewModel>> AllStoragesAsync();
+        Task<IEnumerable<StorageViewModel>> AllAsync();
 
         Task CreateAsync(CreateStorageViewModel model);
-
-        Task EditAsync(CreateStorageViewModel model);
-
-        Task<StorageViewModel> Details(int storageId);
     }
 }
