@@ -37,6 +37,7 @@ namespace CWInventory.Infrastructure.Data
                 .HasPrecision(18, 2);
 
             builder.ApplyConfiguration(new CateogryConfiguration());
+            builder.ApplyConfiguration(new UserConfiguration());
 
             base.OnModelCreating(builder);
         }

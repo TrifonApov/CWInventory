@@ -1,4 +1,5 @@
 ﻿using CWInventory.Infrastructure.Data.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace CWInventory.Infrastructure.Data.SeedDb
 {
@@ -11,10 +12,30 @@ namespace CWInventory.Infrastructure.Data.SeedDb
         public Category DetergentCategory { get; set; }
         public Category MedicalCategory { get; set; }
         public Category CarDetergentCategory { get; set; }
+        public ApplicationUser Administrator { get; set; }
 
         public SeedData()
         {
             SeedCategories();
+            SeedAdmin();
+        }
+
+        private void SeedAdmin()
+        {
+            var hasher = new PasswordHasher<ApplicationUser>();
+
+            Administrator = new ApplicationUser()
+            {
+                Id = "67e4c2d0-dc48-4004-b692-35f04e7f64a0",
+                UserName = "admin@workforce.bg",
+                NormalizedUserName = "ADMIN@WORKFORCE.BG",
+                Email = "admin@workforce.bg",
+                NormalizedEmail = "ADMIN@WORKFORCE.BG",
+                FirstName = "Great",
+                LastName = "Admin"
+            };
+
+            Administrator.PasswordHash = hasher.HashPassword(Administrator, "admin123");
         }
 
         private void SeedCategories()
