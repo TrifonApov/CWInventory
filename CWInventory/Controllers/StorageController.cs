@@ -1,7 +1,5 @@
 ﻿using CWInventory.Core.Contracts;
-using CWInventory.Core.Models.Category;
 using CWInventory.Core.Models.Storage;
-using CWInventory.Core.Services;
 using Microsoft.AspNetCore.Mvc;
 using static CWInventory.Core.Constants.RoleConstants;
 
@@ -19,16 +17,9 @@ namespace CWInventory.Controllers
 
         public async Task<IActionResult> All()
         {
-                var model = await storageService.AllAsync();
+            var model = await storageService.AllAsync();
 
-                return View(model);
-            //if (User.IsInRole(AdminRole))
-            //{
-            //}
-            //else
-            //{
-            //    return BadRequest();
-            //}
+            return View(model);
         }
 
         [HttpGet]
@@ -46,7 +37,7 @@ namespace CWInventory.Controllers
             {
                 return BadRequest();
             }
-            
+
             if (!ModelState.IsValid)
             {
                 return BadRequest();
@@ -58,6 +49,30 @@ namespace CWInventory.Controllers
             }
 
             return RedirectToAction(nameof(All));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> EditAsync(int id)
+        {
+            var model = await storageService.DetailsAsync(id);
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditAsync(StorageDetailsViewModel model)
+        {
+            await storageService.EditAsync(model);
+
+            return RedirectToAction(nameof(All));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Details(int id)
+        {
+            var model = await storageService.DetailsAsync(id);
+
+            return View(model);
         }
     }
 }

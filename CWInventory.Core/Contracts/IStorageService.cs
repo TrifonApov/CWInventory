@@ -7,5 +7,9 @@ namespace CWInventory.Core.Contracts
         Task<IEnumerable<StorageViewModel>> AllAsync();
 
         Task CreateAsync(CreateStorageViewModel model);
+        
+        Task EditAsync(StorageDetailsViewModel model);
+
+        Task<StorageDetailsViewModel> DetailsAsync(int id);
     }
 }

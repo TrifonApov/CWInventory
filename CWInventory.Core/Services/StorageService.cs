@@ -41,14 +41,37 @@ namespace CWInventory.Core.Services
             await repository.SaveChangesAsync();
         }
 
-        public Task<StorageViewModel> Details(int storageId)
+        public async Task EditAsync(StorageDetailsViewModel model)
         {
-            throw new NotImplementedException();
+            var storage = await repository.GetByIdAsync<Storage>(model.Id);
+
+            if (storage != null)
+            {
+                storage.Name = model.Name;
+                storage.ManagerId = model.ManagerId;
+            }
+
+            await repository.SaveChangesAsync();
+        }
+        
+        public async Task<StorageDetailsViewModel> DetailsAsync(int id)
+        {
+            var storage = await repository
+                .AllReadOnly<Storage>()
+                .Where(s => s.Id == id)
+                .Include(s=> s.Manager)
+                .FirstAsync();
+
+            return new StorageDetailsViewModel()
+            {
+                Id = storage.Id,
+                Name = storage.Name,
+                ManagerId = storage.ManagerId,
+                Manager = $"{storage.Manager.FirstName} {storage.Manager.LastName}",
+                Employees = storage.Employees.Select(e => $"{e.FirstName} {e.LastName}").ToList(),
+                Products = storage.Products.Select(p => $"{p.Name} - {p.Storages.Where(sp => sp.StorageId == storage.Id).Select(sp => sp.Quantity)}").ToList()
+            };
         }
 
-        public Task EditAsync(CreateStorageViewModel model)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

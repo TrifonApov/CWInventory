@@ -1,0 +1,62 @@
+﻿@using CWInventory.Core.Models.Storage;
+@using static CWInventory.Core.Constants.RoleConstants;
+
+@model StorageDetailsViewModel
+
+@{
+    ViewData["Title"] = $"Storage {Model.Name} Details";
+}
+
+<div class="card" style="width: 18rem;">
+    <div class="card-body">
+        <h5 class="card-title">Storage @Model.Name</h5>
+
+        @if (!string.IsNullOrEmpty(Model.Manager))
+        {
+            <h6 class="card-subtitle mb-2 text-body-secondary">@Model.Manager</h6>
+        }
+        else
+        {
+            <h6 class="card-subtitle mb-2 text-body-secondary">No manager yet</h6>
+        }
+
+        <ul class="list-group">
+            @if (!Model.Products.Any())
+            {
+                <div>There is no products in storage</div>
+            }
+            else
+            {
+                @foreach (var product in Model.Products)
+                {
+                    <li class="list-group-item">@product</li>
+                }
+            }
+        </ul>
+
+        @if (User.IsInRole(AdminRole))
+        {
+            <div class="dropdown">
+                @if (!Model.Employees.Any())
+                {
+                    <div>There is no employees in storage</div>
+                }
+                else
+                {
+                    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Employees
+                    </a>
+
+                    <ul class="dropdown-menu">
+                        @foreach (var employee in Model.Employees)
+                        {
+                            <li><a class="dropdown-item" asp-controller="Employee" asp-action="Details">@employee</a></li>
+                        }
+                    </ul>
+                }
+            </div>
+            <a class="card-link" asp-controller="Storage" asp-action="Edit" asp-route-id="@Model.Id">Edit storage</a>
+        }
+
+    </div>
+</div>
