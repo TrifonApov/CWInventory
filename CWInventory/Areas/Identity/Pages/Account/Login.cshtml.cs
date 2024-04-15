@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using static CWInventory.Core.Constants.RoleConstants;
 
 namespace CWInventory.Areas.Identity.Pages.Account
 {
@@ -15,11 +16,17 @@ namespace CWInventory.Areas.Identity.Pages.Account
     {
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly ILogger<LoginModel> _logger;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public LoginModel(SignInManager<ApplicationUser> signInManager, ILogger<LoginModel> logger)
+        public LoginModel(
+            SignInManager<ApplicationUser> signInManager, 
+            ILogger<LoginModel> logger,
+            UserManager<ApplicationUser> userManager
+            )
         {
             _signInManager = signInManager;
             _logger = logger;
+            _userManager = userManager;
         }
 
         /// <summary>
@@ -74,11 +81,6 @@ namespace CWInventory.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnGetAsync(string returnUrl = null)
         {
-            //if (User?.Identity?.IsAuthenticated == false)
-            //{
-            //    return RedirectToAction("All", "Product");
-            //}
-
             if (!string.IsNullOrEmpty(ErrorMessage))
             {
                 ModelState.AddModelError(string.Empty, ErrorMessage);
@@ -105,7 +107,14 @@ namespace CWInventory.Areas.Identity.Pages.Account
                 var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
+                    var user = await _userManager.FindByEmailAsync(Input.Email);
                     _logger.LogInformation("User logged in.");
+
+                    if (await _userManager.IsInRoleAsync(user, AdminRole))
+                    {
+                        return RedirectToAction("Dashboard", "Home", new { area =  "Admin" });
+                    }
+
                     return LocalRedirect(returnUrl);
                 }
                 if (result.RequiresTwoFactor)
