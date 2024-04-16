@@ -9,7 +9,7 @@ namespace CWInventory.Core.Services
 {
     public class CategoryService : ICategoryService
     {
-        private readonly IRepository repository;
+        private IRepository repository;
 
         public CategoryService(IRepository _repository)
         {

@@ -9,7 +9,7 @@ namespace CWInventory.Core.Services
 {
     public class ProductService : IProductService
     {
-        private readonly IRepository repository;
+        private IRepository repository;
         public ProductService(IRepository _repository)
         {
             repository = _repository;
