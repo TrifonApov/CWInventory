@@ -106,7 +106,7 @@ namespace CWInventory.Infrastructure.Migrations
                         {
                             Id = "67e4c2d0-dc48-4004-b692-35f04e7f64a0",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "02364594-94c2-4365-93fe-95a4a3ff7b2d",
+                            ConcurrencyStamp = "0d76f2d3-b5da-4249-82f7-2a8684e1a6fc",
                             Email = "admin@workforce.bg",
                             EmailConfirmed = false,
                             FirstName = "Great",
@@ -114,9 +114,9 @@ namespace CWInventory.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@WORKFORCE.BG",
                             NormalizedUserName = "ADMIN@WORKFORCE.BG",
-                            PasswordHash = "AQAAAAEAACcQAAAAEMffr0eH42ajWhnqZyEDLrIPn17hhZcurT7BZqvzu5MH5ubtzFjbLTQqL6nfoXY3ww==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEHWz99JPom9n+6PJWNWJAT6r6O0KhrThkBIeUNyhsibwujpx1F8IuDPn6b9iXa1WHA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "eec83dce-f244-4457-8560-b1ff844d9f7c",
+                            SecurityStamp = "dac287da-9e49-4304-a7b3-109932a46242",
                             TwoFactorEnabled = false,
                             UserName = "admin@workforce.bg"
                         });
@@ -278,6 +278,7 @@ namespace CWInventory.Infrastructure.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("ImageUrl")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)")
                         .HasComment("Likn to product image");
 

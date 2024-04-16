@@ -26,8 +26,9 @@ namespace CWInventory.Infrastructure.Data.Models
         [Comment("Product price")]
         public decimal Price { get; set; }
 
+        [Required]
         [Comment("Likn to product image")]
-        public string? ImageUrl { get; set; }
+        public string ImageUrl { get; set; } = string.Empty;
 
         [Required]
         [Comment("Product's category identifier")]
