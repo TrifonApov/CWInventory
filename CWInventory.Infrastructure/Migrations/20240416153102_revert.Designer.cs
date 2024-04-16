@@ -4,6 +4,7 @@ using CWInventory.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CWInventory.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240416153102_revert")]
+    partial class revert
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -106,7 +108,7 @@ namespace CWInventory.Infrastructure.Migrations
                         {
                             Id = "67e4c2d0-dc48-4004-b692-35f04e7f64a0",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "f70bf5e3-c350-4eb8-a834-48985b4ea2a6",
+                            ConcurrencyStamp = "4867467a-5ed1-44d1-852b-2edc599649c4",
                             Email = "admin@workforce.bg",
                             EmailConfirmed = false,
                             FirstName = "Great",
@@ -114,9 +116,9 @@ namespace CWInventory.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@WORKFORCE.BG",
                             NormalizedUserName = "ADMIN@WORKFORCE.BG",
-                            PasswordHash = "AQAAAAEAACcQAAAAEAOJPbjbpiH3YTwFex1WT2a+q0zKCvMcy2Juc0NdgZ90elJgDGuIVMbqNdiS4KodkA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEPYi9EmWV3HQYYjKupiwLCeCg2sD2ZaMQXdNi6pakoDzpsFFwMMjg08XFy0RiXFkDA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "55304bea-1b6e-4888-ad00-e36a9b7cc17b",
+                            SecurityStamp = "01b8bb78-5b41-4d4e-b240-e0997c2253c3",
                             TwoFactorEnabled = false,
                             UserName = "admin@workforce.bg"
                         });
@@ -278,6 +280,7 @@ namespace CWInventory.Infrastructure.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("ImageUrl")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)")
                         .HasComment("Likn to product image");
 
