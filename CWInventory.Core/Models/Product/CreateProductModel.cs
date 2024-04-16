@@ -21,8 +21,7 @@ namespace CWInventory.Core.Models.Product
         [Required(ErrorMessage = RequiredErrorMessage)]
         public decimal Price { get; set; }
 
-        [Required(ErrorMessage = RequiredErrorMessage)]
-        public string ImageUrl { get; set; } = string.Empty;
+        public string? ImageUrl { get; set; }
 
         [Required(ErrorMessage = RequiredErrorMessage)]
         public int CategoryId { get; set; }
