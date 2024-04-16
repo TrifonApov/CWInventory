@@ -26,12 +26,13 @@
             </li>
         }
     </ul>
-    @if (!User?.Identity?.IsAuthenticated == false)
-    {
-        <a class="btn btn-dark" asp-area="" asp-controller="Product" asp-action="Create">Add new product</a>
-    }
 }
 else
 {
     <p>Nema producti maina</p>
+}
+
+@if (!User?.Identity?.IsAuthenticated == false)
+{
+    <a class="btn btn-dark" asp-area="" asp-controller="Product" asp-action="Create">Add new product</a>
 }
