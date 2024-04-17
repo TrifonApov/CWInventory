@@ -43,7 +43,7 @@ namespace CWInventory.Areas.Admin.Controllers
                 return BadRequest();
             }
 
-            await userService.HireToStorage(storageId, userId);
+            await userService.HireToStorage(userId, storageId);
 
             return RedirectToAction(nameof(All));
         }

@@ -1,5 +1,4 @@
 ﻿using CWInventory.Core.Contracts;
-using CWInventory.Core.Models.Category;
 using CWInventory.Core.Models.Storage;
 using CWInventory.Core.Models.User;
 using CWInventory.Infrastructure.Data.Common;
@@ -33,18 +32,6 @@ namespace CWInventory.Core.Services
                 .ToListAsync();
         }
 
-        public async Task HireToStorage(int storageId, string userId)
-        {
-            var model = await repository.GetByIdAsync<ApplicationUser>(userId);
-
-            if (model != null)
-            {
-                model.StorageId = storageId;
-            }
-
-            await repository.SaveChangesAsync();
-        }
-
         public async Task<HireUserViewModel> UserDetails(string id)
         {
 
@@ -62,16 +49,6 @@ namespace CWInventory.Core.Services
             return user;
         }
 
-        public async Task HireToStorage(string userId, int storageId)
-        {
-            var model = await repository.GetByIdAsync<ApplicationUser>(userId);
-            if (model != null)
-            {
-                model.StorageId = storageId;
-            }
-
-            await repository.SaveChangesAsync();
-        }
         public async Task<IEnumerable<StorageViewModel>> GetStorages()
         {
             return await repository
@@ -82,6 +59,17 @@ namespace CWInventory.Core.Services
                     Name = c.Name,
                 })
             .ToListAsync();
+        }
+
+        public async Task HireToStorage(string userId, int storageId)
+        {
+            var model = await repository.GetByIdAsync<ApplicationUser>(userId);
+            if (model != null)
+            {
+                model.StorageId = storageId;
+            }
+
+            await repository.SaveChangesAsync();
         }
     }
 }
