@@ -4,6 +4,7 @@ using CWInventory.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CWInventory.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240417114129_FixConstraints")]
+    partial class FixConstraints
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -106,7 +108,7 @@ namespace CWInventory.Infrastructure.Migrations
                         {
                             Id = "67e4c2d0-dc48-4004-b692-35f04e7f64a0",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "b267d9c2-0937-4c56-a655-19ec25883019",
+                            ConcurrencyStamp = "92d17176-70e4-44ae-b871-2e6fbedd9ce0",
                             Email = "admin@workforce.bg",
                             EmailConfirmed = false,
                             FirstName = "Great",
@@ -114,9 +116,9 @@ namespace CWInventory.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@WORKFORCE.BG",
                             NormalizedUserName = "ADMIN@WORKFORCE.BG",
-                            PasswordHash = "AQAAAAEAACcQAAAAELFdqDirrfMkqk/zwZLPuLMXuZRUWHoDrEQIVlvWl+iNL2juhq+Mz3xe7RoPKmW4Sw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEASKdqbd85aUqaf/P1MAVTsjHC4GcDpbP9hLW102/aPO0eybFZ8aMAP/awRDd50olg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "9f27363d-e49b-4522-80a3-a653312db56a",
+                            SecurityStamp = "17b78ea8-1ee9-4e26-869c-d8a4f11a8d7c",
                             TwoFactorEnabled = false,
                             UserName = "admin@workforce.bg"
                         });
@@ -560,11 +562,9 @@ namespace CWInventory.Infrastructure.Migrations
 
             modelBuilder.Entity("CWInventory.Infrastructure.Data.Models.ApplicationUser", b =>
                 {
-                    b.HasOne("CWInventory.Infrastructure.Data.Models.Storage", "Storage")
+                    b.HasOne("CWInventory.Infrastructure.Data.Models.Storage", null)
                         .WithMany("Employees")
                         .HasForeignKey("StorageId");
-
-                    b.Navigation("Storage");
                 });
 
             modelBuilder.Entity("CWInventory.Infrastructure.Data.Models.Document", b =>

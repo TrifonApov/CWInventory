@@ -4,6 +4,7 @@ using CWInventory.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CWInventory.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240417113304_rebuild")]
+    partial class rebuild
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -106,7 +108,7 @@ namespace CWInventory.Infrastructure.Migrations
                         {
                             Id = "67e4c2d0-dc48-4004-b692-35f04e7f64a0",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "b267d9c2-0937-4c56-a655-19ec25883019",
+                            ConcurrencyStamp = "93006816-a50b-4f12-a9cf-b36537d52081",
                             Email = "admin@workforce.bg",
                             EmailConfirmed = false,
                             FirstName = "Great",
@@ -114,9 +116,9 @@ namespace CWInventory.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@WORKFORCE.BG",
                             NormalizedUserName = "ADMIN@WORKFORCE.BG",
-                            PasswordHash = "AQAAAAEAACcQAAAAELFdqDirrfMkqk/zwZLPuLMXuZRUWHoDrEQIVlvWl+iNL2juhq+Mz3xe7RoPKmW4Sw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEH8ZzGYPCi2gPO7KcEix2AFeOO6WQcWYaQHcHbb+MpVHYRyoi+gkc6F52aIHEDP1dg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "9f27363d-e49b-4522-80a3-a653312db56a",
+                            SecurityStamp = "81d6e781-457c-49ac-9034-4baa78ea2311",
                             TwoFactorEnabled = false,
                             UserName = "admin@workforce.bg"
                         });
@@ -204,6 +206,9 @@ namespace CWInventory.Infrastructure.Migrations
                         .HasColumnType("int")
                         .HasComment("Storage identifier");
 
+                    b.Property<int?>("StorageId1")
+                        .HasColumnType("int");
+
                     b.Property<int>("TypeId")
                         .HasColumnType("int");
 
@@ -214,6 +219,8 @@ namespace CWInventory.Infrastructure.Migrations
                     b.HasIndex("CreatorId");
 
                     b.HasIndex("StorageId");
+
+                    b.HasIndex("StorageId1");
 
                     b.HasIndex("TypeId");
 
@@ -560,11 +567,9 @@ namespace CWInventory.Infrastructure.Migrations
 
             modelBuilder.Entity("CWInventory.Infrastructure.Data.Models.ApplicationUser", b =>
                 {
-                    b.HasOne("CWInventory.Infrastructure.Data.Models.Storage", "Storage")
+                    b.HasOne("CWInventory.Infrastructure.Data.Models.Storage", null)
                         .WithMany("Employees")
                         .HasForeignKey("StorageId");
-
-                    b.Navigation("Storage");
                 });
 
             modelBuilder.Entity("CWInventory.Infrastructure.Data.Models.Document", b =>
@@ -576,16 +581,20 @@ namespace CWInventory.Infrastructure.Migrations
                         .IsRequired();
 
                     b.HasOne("CWInventory.Infrastructure.Data.Models.ApplicationUser", "Creator")
-                        .WithMany("Documents")
+                        .WithMany()
                         .HasForeignKey("CreatorId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("CWInventory.Infrastructure.Data.Models.Storage", "Storage")
-                        .WithMany("Documents")
+                        .WithMany()
                         .HasForeignKey("StorageId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
+
+                    b.HasOne("CWInventory.Infrastructure.Data.Models.Storage", null)
+                        .WithMany("Documents")
+                        .HasForeignKey("StorageId1");
 
                     b.HasOne("CWInventory.Infrastructure.Data.Models.DocumentType", "Type")
                         .WithMany("Documents")
@@ -708,11 +717,6 @@ namespace CWInventory.Infrastructure.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("CWInventory.Infrastructure.Data.Models.ApplicationUser", b =>
-                {
-                    b.Navigation("Documents");
                 });
 
             modelBuilder.Entity("CWInventory.Infrastructure.Data.Models.Category", b =>
