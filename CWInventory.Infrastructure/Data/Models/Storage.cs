@@ -17,12 +17,10 @@ namespace CWInventory.Infrastructure.Data.Models
         [Comment("Storage name")]
         public string Name { get; set; } = string.Empty;
 
-        [Required]
-        [Comment("Storage manager identifier")]
-        public string ManagerId { get; set; } = string.Empty;
-
+        public int? ManagerId { get; set; }
+        
         [ForeignKey(nameof(ManagerId))]
-        public ApplicationUser Manager { get; set; } = null!;
+        public Manager? Manager { get; set; }
 
         public ICollection<ApplicationUser> Employees { get; set; } = new List<ApplicationUser>();
 

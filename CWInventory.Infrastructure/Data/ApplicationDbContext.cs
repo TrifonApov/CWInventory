@@ -24,17 +24,22 @@ namespace CWInventory.Infrastructure.Data
 
             builder.Entity<Document>()
                 .HasOne(d => d.Creator)
-                .WithMany()
+                .WithMany(c=>c.Documents)
                 .OnDelete(DeleteBehavior.NoAction);
 
             builder.Entity<Document>()
                 .HasOne(d => d.Storage)
-                .WithMany()
+                .WithMany(s => s.Documents)
                 .OnDelete(DeleteBehavior.NoAction);
 
             builder.Entity<Product>()
                 .Property(p => p.Price)
                 .HasPrecision(18, 2);
+
+            builder.Entity<Manager>()
+                .HasOne(m => m.Storage)
+                .WithOne(m => m.Manager)
+                .OnDelete(DeleteBehavior.Cascade);
 
             builder.ApplyConfiguration(new CateogryConfiguration());
             builder.ApplyConfiguration(new UserConfiguration());
@@ -46,6 +51,7 @@ namespace CWInventory.Infrastructure.Data
         public DbSet<Category> Categories { get; set; } = null!;
         public DbSet<Document> Documents { get; set; } = null!;
         public DbSet<DocumentType> DocumentTypes { get; set; } = null!;
+        public DbSet<Manager> Managers { get; set; } = null!;
         public DbSet<Product> Products { get; set; } = null!;
         public DbSet<Storage> Storages { get; set; } = null!;
         public DbSet<StoragesProducts> StoragesProducts { get; set; } = null!;

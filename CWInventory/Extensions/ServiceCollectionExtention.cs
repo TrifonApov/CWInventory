@@ -1,10 +1,10 @@
 ﻿using CWInventory.Core.Contracts;
 using CWInventory.Core.Services;
-using CWInventory.Infrastructure.Data.Common;
 using CWInventory.Infrastructure.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using CWInventory.Infrastructure.Data.Models;
+using CWInventory.Infrastructure.Data.Common;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
@@ -16,6 +16,7 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<IStorageService, StorageService>();
             services.AddScoped<IDocumentService, DocumentService>();
+            services.AddScoped<IUserService, UserService>();
 
             return services;
         }
@@ -26,9 +27,6 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
 
             services.AddScoped<IRepository, Repository>();
-            services.AddScoped<ICategoryService, CategoryService>();
-            services.AddScoped<IStorageService, StorageService>();
-            services.AddScoped<IDocumentService, DocumentService>();
 
             services.AddDatabaseDeveloperPageExceptionFilter();
 

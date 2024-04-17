@@ -9,9 +9,9 @@ namespace CWInventory.Core.Models.Storage
 
         public string Name { get; set; } = string.Empty;
 
-        public string ManagerId { get; set; } = string.Empty;
+        public int? ManagerId { get; set; }
 
-        public string Manager { get; set; } = string.Empty;
+        public string? Manager { get; set; }
 
         public ICollection<string> Employees { get; set; } = new List<string>();
 

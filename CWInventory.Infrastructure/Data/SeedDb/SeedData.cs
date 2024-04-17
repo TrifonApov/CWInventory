@@ -45,7 +45,7 @@ namespace CWInventory.Infrastructure.Data.SeedDb
                 UserId = "67e4c2d0-dc48-4004-b692-35f04e7f64a0"
             };
 
-            Administrator.PasswordHash = hasher.HashPassword(Administrator, "admin123");
+            Administrator.PasswordHash = hasher.HashPassword(Administrator, "tb@9fjQCAGmd@J*");
         }
 
         private void SeedCategories()

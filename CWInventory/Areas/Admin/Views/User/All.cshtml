@@ -1,0 +1,36 @@
+﻿@using static CWInventory.Core.Constants.RoleConstants;
+
+@model IEnumerable<UserDetailsViewModel>
+
+@{
+    ViewData["Title"] = "All Users";
+}
+
+@{
+    if (Model.Any())
+    {
+        <ul class="list-group">
+            @foreach (var user in Model)
+            {
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                    <div>@user.FullName (@user.Email)</div>
+                    @if (!string.IsNullOrEmpty(user.StorageName))
+                    {
+                        <div class="text-success">@user.StorageName</div>
+                        <a class="btn" asp-area="@AdminAreaName" asp-controller="User" asp-action="SetManager" asp-route-userId="@user.Id" asp-route-storageId="@user.StorageId">Set as manager</a>
+                    }
+                    else
+                    {
+                        <a asp-area="@AdminAreaName" asp-controller="User" asp-action="HireToStorage" asp-route-id="@user.Id">Hire to storage</a>
+                    }
+                    
+                </li>
+            }
+        </ul>
+
+    }
+    else
+    {
+        <h2>There is no users yet</h2>
+    }
+}

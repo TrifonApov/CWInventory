@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using static CWInventory.Infrastructure.Constants.DataConstants;
 
 namespace CWInventory.Infrastructure.Data.Models
@@ -19,5 +20,12 @@ namespace CWInventory.Infrastructure.Data.Models
             MinimumLength = NameMinimumLength,
             ErrorMessage = LengthErrorMessage)]
         public string LastName { get; set; } = string.Empty;
+
+        public int? StorageId { get; set; }
+        
+        [ForeignKey(nameof(StorageId))]
+        public Storage? Storage { get; set; }
+
+        public ICollection<Document> Documents { get; set; } = new List<Document>();
     }
 }

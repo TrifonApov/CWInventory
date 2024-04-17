@@ -11,7 +11,6 @@ namespace CWInventory.Core.Models.Storage
             ErrorMessage = LengthErrorMessage)]
         public string Name { get; set; } = string.Empty;
 
-        [Required]
-        public string ManagerId { get; set; } = string.Empty;
+        public int? ManagerId { get; set; }
     }
 }
