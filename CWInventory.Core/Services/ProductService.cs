@@ -127,5 +127,39 @@ namespace CWInventory.Core.Services
                 })
                 .FirstAsync(p => p.Id == id);
         }
+
+        public Task<EditProductModel> EditDetaisAsync(int id)
+        {
+            var model = repository
+                .AllReadOnly<Product>()
+                .Where(p => p.Id == id)
+                .Select(p => new EditProductModel()
+                {
+                    Id = p.Id,
+                    ImageUrl = p.ImageUrl,
+                    Name = p.Name,
+                    CategoryId = p.Category.Id,
+                    Description = p.Description,
+                    Price = p.Price
+                })
+                .FirstOrDefaultAsync(p => p.Id == id);
+
+
+            return model;
+        }
+
+        public async Task EditAsync(EditProductModel model)
+        {
+            var product = await repository.GetByIdAsync<Product>(model.Id);
+
+            if (product != null)
+            {
+                product.Name = model.Name;
+                product.Description = model.Description;
+                product.Price = model.Price;
+                product.ImageUrl = model.ImageUrl;
+                product.CategoryId = model.CategoryId;
+            }
+        }
     }
 }

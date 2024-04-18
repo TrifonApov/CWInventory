@@ -32,6 +32,14 @@ namespace CWInventory.Controllers
         }
 
         [HttpGet]
+        public async Task<IActionResult> Details(int id)
+        {
+            var model = await productService.DetailsAsync(id);
+
+            return View(model);
+        }
+
+        [HttpGet]
         public async Task<IActionResult> CreateAsync()
         {
             var model = new CreateProductModel();
@@ -58,12 +66,35 @@ namespace CWInventory.Controllers
             return RedirectToAction(nameof(All));
         }
 
+
         [HttpGet]
-        public async Task<IActionResult> Details(int id)
+        public async Task<IActionResult> EditAsync(int id)
         {
-            var model = await productService.DetailsAsync(id);
+            var model = await productService.EditDetaisAsync(id);
+            if (model == null)
+            {
+                return BadRequest();
+            }
+
+            model.Categories = await productService.GetCategories();
 
             return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditAsync(EditProductModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            if (model != null)
+            {
+                await productService.EditAsync(model);
+            }
+
+            return RedirectToAction(nameof(All));
         }
 
     }
