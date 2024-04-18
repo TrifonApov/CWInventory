@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CWInventory.Controllers
 {
-    public class CategoryController : Controller
+    public class CategoryController : BaseController
     {
         private ICategoryService categoryService;
 
