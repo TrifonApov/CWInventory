@@ -4,6 +4,7 @@ using CWInventory.Core.Models.User;
 using CWInventory.Infrastructure.Data.Common;
 using CWInventory.Infrastructure.Data.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace CWInventory.Core.Services
 {
@@ -27,7 +28,8 @@ namespace CWInventory.Core.Services
                     FullName = $"{u.FirstName} {u.LastName}",
                     Email = u.Email,
                     StorageId = u.StorageId,
-                    StorageName = u.Storage == null ? null : u.Storage.Name
+                    StorageName = u.Storage == null ? null : u.Storage.Name,
+                    IsManager = u.Storage.Manager.UserId == u.Id
                 })
                 .ToListAsync();
         }
@@ -70,6 +72,48 @@ namespace CWInventory.Core.Services
             }
 
             await repository.SaveChangesAsync();
+        }
+
+        public async Task SetAsStorageManager(string userId)
+        {
+            var model = await repository
+                .All<ApplicationUser>()
+                .Include(u => u.Storage)
+                .FirstAsync(u => u.Id == userId);
+
+            if (model != null && model.Storage != null)
+            {
+                var storage = await repository
+                    .All<Storage>()
+                    .Include(s=>s.Manager)
+                    .FirstOrDefaultAsync(s=> s.Id == model.Storage.Id);
+
+                if (storage != null && storage.Manager == null)
+                {
+                    var newManager = new Manager
+                    {
+                        StorageId = model.Storage.Id,
+                        UserId = userId
+                    };
+                    await repository.AddAsync(newManager);
+                    await repository.SaveChangesAsync();
+                }
+            }
+        }
+
+        public async Task RemoveManager(string userId)
+        {
+            var model = await repository
+                .All<ApplicationUser>()
+                .Include(u => u.Storage)
+                .Include(u => u.Storage.Manager)
+                .FirstAsync(u => u.Id == userId);
+            
+            if (model != null && model.Storage != null && model.Storage.Manager.UserId == model.Id)
+            {
+                await repository.DeleteAsync<Manager>(model.Storage.Manager.Id);
+                await repository.SaveChangesAsync();
+            }
         }
     }
 }

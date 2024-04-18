@@ -12,5 +12,8 @@ namespace CWInventory.Core.Contracts
         Task<HireUserViewModel> UserDetails(string id);
 
         Task HireToStorage(string userId, int storageId);
+
+        Task SetAsStorageManager(string userId);
+        Task RemoveManager(string userId);
     }
 }

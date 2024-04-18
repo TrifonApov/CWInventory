@@ -13,5 +13,7 @@ namespace CWInventory.Core.Models.User
         public int? StorageId { get; set; }
 
         public string? StorageName { get; set; }
+
+        public bool IsManager { get; set; }
     }
 }

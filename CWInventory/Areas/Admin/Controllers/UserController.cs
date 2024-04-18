@@ -47,5 +47,21 @@ namespace CWInventory.Areas.Admin.Controllers
 
             return RedirectToAction(nameof(All));
         }
+
+        [HttpPost]
+        public async Task<IActionResult> SetAsStorageManager(string id)
+        {
+            await userService.SetAsStorageManager(id);
+
+            return RedirectToAction(nameof(All));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> RemoveManager(string id)
+        {
+            await userService.RemoveManager(id);
+
+            return RedirectToAction(nameof(All));
+        }
     }
 }

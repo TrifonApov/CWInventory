@@ -17,13 +17,24 @@
                     @if (!string.IsNullOrEmpty(user.StorageName))
                     {
                         <div class="text-success">@user.StorageName</div>
-                        <a class="btn" asp-area="@AdminAreaName" asp-controller="User" asp-action="SetManager" asp-route-userId="@user.Id" asp-route-storageId="@user.StorageId">Set as manager</a>
+                        if (!user.IsManager)
+                        {
+                            <form asp-area="@AdminAreaName" asp-controller="User" asp-action="SetAsStorageManager" asp-route-id="@user.Id">
+                                <input type="submit" value="Set as manager" />
+                            </form>
+                        }
+                        else
+                        {
+                            <form asp-area="@AdminAreaName" asp-controller="User" asp-action="RemoveManager" asp-route-id="@user.Id">
+                                <input type="submit" value="Remove as manager" />
+                            </form>
+                        }
                     }
                     else
                     {
                         <a asp-area="@AdminAreaName" asp-controller="User" asp-action="HireToStorage" asp-route-id="@user.Id">Hire to storage</a>
                     }
-                    
+
                 </li>
             }
         </ul>

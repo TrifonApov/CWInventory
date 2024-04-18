@@ -26,6 +26,9 @@ namespace CWInventory.Infrastructure.Data.Models
         [ForeignKey(nameof(StorageId))]
         public Storage? Storage { get; set; }
 
+        public Manager? Manager { get; set; }
+
         public ICollection<Document> Documents { get; set; } = new List<Document>();
+
     }
 }
