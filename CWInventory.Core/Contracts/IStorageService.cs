@@ -1,4 +1,5 @@
-﻿using CWInventory.Core.Models.Storage;
+﻿using CWInventory.Core.Models.Product;
+using CWInventory.Core.Models.Storage;
 
 namespace CWInventory.Core.Contracts
 {
