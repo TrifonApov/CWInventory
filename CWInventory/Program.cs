@@ -42,4 +42,3 @@ await app.CreateAdminRoleAsync();
 
 app.Run();
 
-// test Git
